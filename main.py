@@ -1,11 +1,14 @@
 import os
 
+from googletrans import Translator
 from gtts import gTTS
 
 with open('textfile.txt', 'r') as f:
     x = f.read()
+f.close()
 
-language = 'en'
-audio = gTTS(text=x, slow=False )
-audio.save('audiofile.wav')
-os.system('audiofile.wav')
+translator = Translator()
+y = translator.translate(x, src='en', dest='gu')
+audio = gTTS(text=y.text, slow=True, lang='gu')
+audio.save('audiofile.mp3')
+os.system('audiofile.mp3')
